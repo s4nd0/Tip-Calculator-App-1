@@ -1,0 +1,293 @@
+:root
+{
+    --strong-cyan: hsl(172, 67%, 45%);
+    --very-dark: hsl(183, 100%, 15%);
+    --grayish-cyan: hsl(184, 14%, 56%);
+    --light-grayish-cyan: hsl(185, 41%, 84%);
+    --very-light-grayish-cyan: hsl(189, 41%, 97%);
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+    font-family: 'Space Mono';
+
+    background-color: var(--light-grayish-cyan);
+}
+
+.header
+{
+    margin: 40px;
+}
+
+main
+{
+    width: 100%;
+    max-width: 700px;
+    box-sizing: border-box;
+
+    padding: 2rem;
+    border-radius: 1rem;
+
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+}
+
+main > div 
+{
+    box-sizing: border-box;
+}
+
+.title
+{
+    color: var(--grayish-cyan);
+}
+
+.title-flex
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.title-flex p 
+{
+    color: rgb(216, 49, 7);
+    font-size: 12px;
+    display: none;
+}
+
+.text-input
+{
+    width: 100%;
+    padding: .4rem 1rem;
+    margin-top: .4rem;
+    margin-bottom: 2rem;
+
+    box-sizing: border-box;
+    border-radius: .3rem;
+    border: none;
+
+    background-color: var(--very-light-grayish-cyan);
+    
+    text-align: right;
+    font-family: 'Space Mono';
+    font-size: 24px;
+    color: var(--very-dark);
+
+    background-size: 12px;
+    background-position: left 16px top 15px;
+    background-repeat: no-repeat; 
+
+    outline: none;
+    border: 2px solid var(--very-light-grayish-cyan);
+}
+.text-input:hover 
+{
+    cursor: pointer;
+}
+.text-input:focus
+{
+    border: 2px solid var(--strong-cyan);
+}
+.text-input::placeholder
+{
+    color: var(--light-grayish-cyan);
+}
+
+.logo-dollar
+{
+    background-image: url(./images/icon-dollar.svg);
+}
+.logo-person
+{
+    background-image: url(./images/icon-person.svg);
+}
+
+.tip-grid
+{
+    display: grid;
+
+    grid-template-columns: 48% 48%;
+    column-gap: 1rem;
+    row-gap: 1rem;
+
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+
+    box-sizing: border-box;
+}
+
+.tip-grid button
+{
+    transition: background-color 0.1s ease-in-out;
+    font-family: 'Space Mono';
+    font-size: 20px;
+    color: white;
+    background-color: var(--very-dark);
+    border: none;
+    border-radius: .3rem;
+    padding: .5rem 0;
+    box-sizing: border-box;
+}
+.tip-grid button:hover 
+{
+    cursor: pointer;
+    background-color: hsl(172, 64%, 70%);
+}
+
+.tip-grid input
+{
+    background-color: var(--very-light-grayish-cyan);
+    border: none;
+    font-size: 20px;
+    border-radius: .3rem;
+    padding: .5rem 1rem;
+    font-family: 'Space Mono';
+    text-align: right;
+    box-sizing: border-box;
+    color: var(--very-dark);
+    outline: none;
+    border: 2px solid var(--very-light-grayish-cyan);
+
+}
+.tip-grid input:hover 
+{
+    cursor: pointer;
+}
+.tip-grid input:focus
+{
+    border: 2px solid var(--strong-cyan);
+}
+.tip-grid input::placeholder
+{
+    font-size: 20px;
+    color: var(--grayish-cyan);
+}
+
+.summary
+{
+    background-color: var(--very-dark);
+    padding: 2rem 1.5rem 1.5rem;
+
+    border-radius: 1rem;
+
+    color: var(--grayish-cyan);
+    font-size: .8rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.summary > div 
+{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    column-gap: 1rem;
+    row-gap: 1rem;
+    margin-right: 20px;
+}
+
+.summary-title
+{
+    color: white;
+    font-size: .9rem;
+}
+
+.tip-price
+{
+    font-size: 32px;
+    color: var(--strong-cyan);
+    text-align: right;
+}
+
+.summary button
+{
+    transition: background-color 0.1s ease-in-out;
+    text-transform: uppercase;
+    color: var(--very-dark);
+    background-color: var(--strong-cyan);
+    padding: .5rem 0;
+    border-radius: .3rem;
+    border: none;
+    font-family: 'Space Mono';
+    font-size: 1.1rem;
+    margin-top: 2rem;
+}
+.summary button:hover
+{
+    cursor: pointer;
+    background-color: hsl(172, 64%, 70%);
+}
+
+.attribution
+{
+    font-family: 'Space Mono';
+    font-size: 1rem;
+    color: var(--very-dark);
+    text-align: center;
+    margin-bottom: 3rem;
+    margin: 1rem;
+}
+.attribution a
+{
+    text-decoration: none;
+    color: var(--strong-cyan);
+}
+
+@media screen and (min-width: 670px) 
+{
+    main 
+    {
+        flex-direction: row;
+    }
+
+    main > div:first-child
+    {
+        margin-right: 20px;
+        max-width: 50%;
+    }
+    main > div:last-child
+    {
+        margin-left: 20px;
+    }
+
+    .summary
+    {
+        width: 100%;
+        font-size: .6rem;
+    }
+
+    .tip-grid
+    {
+        grid-template-columns: 30% 30% 30%;
+    }
+    .tip-grid input
+    {
+        font-size: 16px;
+    }
+    .tip-grid input::placeholder
+    {
+        font-size: 16px;
+    }
+
+    .summary-title
+    {
+    font-size: .7rem;
+    }
+
+}

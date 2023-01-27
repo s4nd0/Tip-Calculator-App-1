@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | Tip calculator app</title>
+
+</head>
+<body onload="isGood()">
+  <div class="header">
+    <img src="./images/logo.svg" alt="logo">
+  </div>
+
+  <main>
+    <div>
+      <p class="title">Bill</p>
+      <input onkeyup="isGood(); cashAmount()" type="text" class="text-input logo-dollar" id="cash" placeholder="0">
+
+      <p class="title">Select Tip %</p>
+      <div class="tip-grid">
+        <button class="tip-button" onclick="tip(0.05, 0)">5%</button>
+        <button class="tip-button" onclick="tip(0.1, 1)">10%</button>
+        <button class="tip-button" onclick="tip(0.15, 2)">15%</button>
+        <button class="tip-button" onclick="tip(0.2, 3)">20%</button>
+        <button class="tip-button" onclick="tip(0.5, 4)">50%</button>
+        <input onkeyup="isGood(); customPercent()" onclick="" type="text" placeholder="Custom" id="custom-tip"> 
+      </div>
+
+      <div class="title title-flex">Number of People <p id="people-error">Can't be zero</p></div>
+      <input onkeyup="isGood(); peopleAmount()" type="text" class="text-input logo-person" id="people" placeholder="0">
+    </div>
+
+    <div class="summary">
+      <div>
+        <div>
+          <p class="summary-title">Tip Amount</p>
+          / person
+        </div>
+        <p id="tip-amount" class="tip-price">$0.00</p>
+
+        <div>
+          <p class="summary-title">Total</p>
+          / person
+        </div>
+        <p id="total" class="tip-price">$0.00</p>
+      </div>
+
+      <button id="reset-button" onclick="resetWork()" onmouseover="resetHover()" onmouseout="resetHover2()">reset</button>
+    </div>
+
+  </main>
+
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://www.linkedin.com/in/piotr-piasko-7b368b261/" target="_blank">Piotr Piasko</a>.
+  </footer>
+
+  <script>
+
+    var reset = document.getElementById("reset-button");
+    var cashInput = document.getElementById("cash");
+    var peopleInput = document.getElementById("people");
+    var tipPercent = 0;
+    var cash = 0;
+    var people = 0;
+    var tipValue = 0;
+    var totalValue = 0;
+    var custom = document.getElementById("custom-tip");
+    var tipAmount = document.getElementById("tip-amount");
+    var total = document.getElementById("total");
+
+    function resetHover()
+    {
+      if(isGood())
+      {
+        reset.style.backgroundColor = "hsl(172, 64%, 70%)";
+      }
+    }
+    function resetHover2()
+    {
+      if(isGood())
+      {
+        reset.style.backgroundColor = "hsl(172, 67%, 45%)";
+      }
+    }
+    function resetWork()
+    {
+      if(isGood())
+      {
+        window.location.reload();
+      }
+    }
+
+    function isGood()
+    {
+      if(tipPercent == 0 && cashInput.value == "" && peopleInput.value == "" && custom.value == "")
+      {
+        reset.style.cursor = "not-allowed";
+        reset.style.backgroundColor = "hsl(183, 100%, 20%)";
+        return false;
+      }
+      else
+      {
+        reset.style.cursor = "pointer";
+        reset.style.backgroundColor = "hsl(172, 67%, 45%)";
+        return true;
+      }
+    }
+
+    var btn = document.getElementsByClassName("tip-button");
+
+    function tip(x, n)
+    {
+      tipPercent = x;
+
+      btn[0].style.backgroundColor = "hsl(183, 100%, 15%)";
+      btn[0].style.color = "white";
+
+      btn[1].style.backgroundColor = "hsl(183, 100%, 15%)";
+      btn[1].style.color = "white";
+
+      btn[2].style.backgroundColor = "hsl(183, 100%, 15%)";
+      btn[2].style.color = "white";
+
+      btn[3].style.backgroundColor = "hsl(183, 100%, 15%)";
+      btn[3].style.color = "white";
+
+      btn[4].style.backgroundColor = "hsl(183, 100%, 15%)";
+      btn[4].style.color = "white";
+
+      btn[n].style.backgroundColor = "hsl(172, 67%, 45%)";
+      btn[n].style.color = "hsl(183, 100%, 15%)";
+
+      custom.value = "";
+
+      isGood();
+      calculate();
+    }
+
+    function customPercent()
+    {
+      btn[0].style.backgroundColor = "hsl(183, 100%, 15%)";
+      btn[0].style.color = "white";
+
+      btn[1].style.backgroundColor = "hsl(183, 100%, 15%)";
+      btn[1].style.color = "white";
+
+      btn[2].style.backgroundColor = "hsl(183, 100%, 15%)";
+      btn[2].style.color = "white";
+
+      btn[3].style.backgroundColor = "hsl(183, 100%, 15%)";
+      btn[3].style.color = "white";
+
+      btn[4].style.backgroundColor = "hsl(183, 100%, 15%)";
+      btn[4].style.color = "white";
+
+      tipPercent = custom.value / 100;
+
+      calculate();
+    }
+
+    function cashAmount()
+    {
+      cash = cashInput.value;
+      calculate();
+    }
+
+    function peopleAmount()
+    {
+      people = peopleInput.value;
+      calculate();
+    }
+
+    function calculate()
+    {
+      if(people > 0)
+      { // fine
+        peopleInput.style.border = "2px solid hsl(189, 41%, 97%)";
+        document.getElementById("people-error").style.display = "none";
+
+        tipValue = (cash * tipPercent) / people;
+        tipValue = (Math.round(tipValue * 100) / 100).toFixed(2);
+
+        tipAmount.innerHTML = "$" + tipValue;
+
+        cash = parseFloat(cash);
+        tipValue = parseFloat(tipValue);
+
+        totalValue = cash / people + tipValue;
+        totalValue = (Math.round(totalValue * 100) / 100).toFixed(2);
+
+        total.innerHTML = "$" + totalValue;
+        
+      }
+      else
+      { // not fine
+        peopleInput.style.border = "2px solid rgb(216, 49, 7)";
+        document.getElementById("people-error").style.display = "block";
+        tipAmount.innerHTML = "$0.00";
+        total.innerHTML = "$0.00";
+      }
+    }
+
+
+  </script>
+</body>
+</html>
